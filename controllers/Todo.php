@@ -26,18 +26,17 @@ class Todo
     return $todo->toArray();
 }
      
-   /* public function readAction()
+    public function readAction()
     {
-        //read all the todo items
+    	/*
+        //read all the todo items. Need to write this
         
       //pass the user's username and password to authenticate the user
     $todo->read($this->_params['username'], $this->_params['userpass']);
-     
-    //return the todo item in array format
-    return $todo->toArray();
-        
+    
+       */    
     }
-  */   
+  
     public function updateAction()
     {
         //update a todo item
