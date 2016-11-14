@@ -27,12 +27,13 @@ class Todo
      
     public function readAction()
     {
-       //read all the todo items. 
+       /*read all the todo items. 
      $todo = new TodoItem();
 	 // Assign the file contents and return to index.php $result['data']
 	 $user_info = $todo->read($this->_params['username'], $this->_params['userpass']);
      //print_r($user_info);
      return $user_info;
+	  */
     }
   
     public function updateAction()
