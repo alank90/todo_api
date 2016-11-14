@@ -40,7 +40,7 @@ try {
 	//get the action and format it correctly so all the
 	//letters are not capitalized, and append 'Action'
 	$action = strtolower($params['action']) . 'Action';
- print_r($action);
+
 	//check if the controller exists. if not, throw an exception
 	if (file_exists("controllers/{$controller}.php")) {
 		include_once "controllers/{$controller}.php";

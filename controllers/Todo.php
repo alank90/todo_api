@@ -7,8 +7,7 @@ class Todo
     public function __construct($params)
     {
         $this->_params = $params;
-		//print_r($this->_params);
-    }
+	}
      
     public function createAction()
 {
@@ -28,13 +27,12 @@ class Todo
      
     public function readAction()
     {
-    	/*
-        //read all the todo items. Need to write this
-        
-      //pass the user's username and password to authenticate the user
-    $todo->read($this->_params['username'], $this->_params['userpass']);
-    
-       */    
+       //read all the todo items. 
+     $todo = new TodoItem();
+	 // Assign the file contents and return to index.php $result['data']
+	 $user_info = $todo->read($this->_params['username'], $this->_params['userpass']);
+     //print_r($user_info);
+     return $user_info;
     }
   
     public function updateAction()

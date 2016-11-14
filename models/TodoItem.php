@@ -38,10 +38,10 @@
     }
 
 
-/*===========  New Read function ==================
+//===========  New Read function ==================
   public function read($username, $userpass)
     {
-    	echo 'Im in read Function!';
+    	//echo 'Im in read Function!';
         //get the username/password hash
         $userhash = sha1("{$username}_{$userpass}");
 		 if( is_dir(DATA_PATH . "/{$userhash}") === false ) {
@@ -52,22 +52,21 @@
         if( is_null($this->todo_id) || !is_numeric($this->todo_id) ) {
               echo 'Error. No matching todo_id ';
         }
-         
-        //get the array version of this todo item
-        $todo_item_array = $this->toArray();
-      
+            
         //read the serialized array version into a variable
-        $success = file_get_contents(DATA_PATH . "/{$userhash}/{$this->todo_id}.txt");
+        $todo_info = file_get_contents(DATA_PATH . "/{$userhash}/{$this->todo_id}.txt");
          
-        //if saving was not successful, throw an exception
-        if( $success === false ) {
+        //if reading was not successful, throw an exception
+        if( $todo_info === false ) {
             throw new Exception('Failed to read todo item');
+			exit;
         }
-         
-        //return the array version
-        return $todo_item_array;
+		
+		// Return the contents of the Todo file
+		return $todo_info;
+        
     }
-   */  
+   
     public function toArray()
     {
         //return an array version of the todo item
