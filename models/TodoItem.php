@@ -41,8 +41,7 @@
 //===========  New Read function ==================
   public function read($username, $userpass)
     {
-    	//echo 'Im in read Function!';
-        //get the username/password hash
+    	  //get the username/password hash
         $userhash = sha1("{$username}_{$userpass}");
 		 if( is_dir(DATA_PATH . "/{$userhash}") === false ) {
             echo 'Error. No Such User file. ';
