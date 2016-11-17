@@ -27,13 +27,18 @@ class Todo
      
     public function readAction()
     {
-       /*read all the todo items. 
-     $todo = new TodoItem();
-	 // Assign the file contents and return to index.php $result['data']
-	 $user_info = $todo->read($this->_params['username'], $this->_params['userpass']);
-     //print_r($user_info);
-     return $user_info;
-	  */
+    	//Hard coded return. 
+      //$readResult = array("todo_id"=>"1323343689","title"=>"test3 title","description"=>"test description","due_date"=>"","is_done"=>"false");
+	  $readResult['data' ] = "Error. try again!!";
+	  return $readResult; 
+	 
+       //read all the todo items. 
+     // $todo = new TodoItem();
+	 
+	   /* Assign the file contents and return to index.php $result['data']
+	  $user_info = $todo->read($this->_params['username'], $this->_params['userpass']);
+      return $user_info;
+	 */
     }
   
     public function updateAction()
