@@ -48,8 +48,9 @@ try {
 		throw new Exception('Controller is invalid.');
 	}
 
-	//create a new instance of the controller, and pass
-	//it the parameters from the request
+	//create a new instance of the controller, and pass it the parameters 
+	//   from the request. Important!!! This is where Todo.php gets instantiated.
+	
 	$controller = new $controller($params);
     
 	//check if the action exists in the controller. if not, throw an exception.

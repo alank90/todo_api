@@ -30,24 +30,13 @@ class Todo
     	//Hard coded return. 
       //$readResult = array("todo_id"=>"1323343689","title"=>"test3 title","description"=>"test description","due_date"=>"","is_done"=>"false");
 	  
-	   //get the username/password hash
-	   $user = $this->_params['username'];
-	   $pswd = $this->_params['userpass'];
-       $userhash = sha1("{$user}_{$pswd}");
-	   if( is_dir(DATA_PATH . "/{$userhash}") === false ) {
-             $readResult['data' ] = "Error. No such Directory.try again!!";
-        }
+	     //create a new todo item
+      $todo = new TodoItem();
 	  
-	  //$readResult['data' ] = "Error. try again!!";
-	  return $readResult; 
-	 
-       //read all the todo items. 
-     // $todo = new TodoItem();
-	 
-	   /* Assign the file contents and return to index.php $result['data']
-	  $user_info = $todo->read($this->_params['username'], $this->_params['userpass']);
-      return $user_info;
-	 */
+	  
+    //pass the user's username and password to authenticate the user
+    $todo->read($this->_params['username'], $this->_params['userpass']);
+     
     }
   
     public function updateAction()
