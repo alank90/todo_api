@@ -28,12 +28,8 @@ class Todo
     public function readAction()
     {
     	//Hard coded return. 
-<<<<<<< HEAD
       //$readResult = array("todo_id"=>"1323343689","title"=>"test3 title","description"=>"test description","due_date"=>"","is_done"=>"false");
 	  $readResult['data' ] = "Error. try again!!";
-=======
-      $readResult = array("todo_id"=>"1323343689","title"=>"test3 title","description"=>"test description","due_date"=>"","is_done"=>"false");
->>>>>>> 555fbeda8ff362a5be1ffbde84ce39ce91ec019f
 	  return $readResult; 
 	 
        //read all the todo items. 
