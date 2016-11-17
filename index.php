@@ -13,7 +13,7 @@ try {
 	//*UPDATED*
 	//get the encrypted request
 	$enc_request = $_REQUEST['enc_request'];
-     
+    
 	//get the provided app id
 	$app_id = $_REQUEST['app_id'];
   
