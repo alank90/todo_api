@@ -29,7 +29,16 @@ class Todo
     {
     	//Hard coded return. 
       //$readResult = array("todo_id"=>"1323343689","title"=>"test3 title","description"=>"test description","due_date"=>"","is_done"=>"false");
-	  $readResult['data' ] = "Error. try again!!";
+	  
+	   //get the username/password hash
+	   $user = $this->_params['username'];
+	   $pswd = $this->_params['userpass'];
+       $userhash = sha1("{$user}_{$pswd}");
+	   if( is_dir(DATA_PATH . "/{$userhash}") === false ) {
+             $readResult['data' ] = "Error. No such Directory.try again!!";
+        }
+	  
+	  //$readResult['data' ] = "Error. try again!!";
 	  return $readResult; 
 	 
        //read all the todo items. 
