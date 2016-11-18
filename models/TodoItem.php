@@ -59,7 +59,7 @@
   	
 	// Check if file exists and read it else throw an error.
 	if (file_exists(DATA_PATH . "/{$userhash}/{$this->todo_id}.txt"))	{
-         $readResult = array("todo_id"=>"1478802818","title"=>"test3 title","description"=>"test description","due_date"=>"","is_done"=>"false");
+         $readResult = file_get_contents(DATA_PATH . "/{$userhash}/{$this->todo_id}.txt");
          return $readResult;
 	} else  {
 		 $readResult =  'Error. No Such User file. ';
