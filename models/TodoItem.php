@@ -47,6 +47,15 @@
             $readResult =  'Error. No Such Directory Exists. ';
 			 return $readResult;
         } 
+		 
+	 $this->todo_id = "1478802818";
+		 
+     //Check if the $todo_id exists
+        if( is_null($this->todo_id) || !is_numeric($this->todo_id) ) {
+            //Throw Error
+           $readResult =  'Error. No Such todo_id. ';
+		    return $readResult;
+	    }
   	
 	// Check if file exists and read it else throw an error.
 	if (file_exists(DATA_PATH . "/{$userhash}/{$this->todo_id}.txt"))	{
