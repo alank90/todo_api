@@ -27,16 +27,12 @@ class Todo
      
     public function readAction()
     {
-    	//Hard coded return. 
-      //$readResult = array("todo_id"=>"1323343689","title"=>"test3 title","description"=>"test description","due_date"=>"","is_done"=>"false");
+    	  //create a new todo item
+     $todo = new TodoItem();
 	  
-	     //create a new todo item
-      $todo = new TodoItem();
-	  
-	  
-    //pass the user's username and password to authenticate the user
-    $todo->read($this->_params['username'], $this->_params['userpass']);
-     
+    //Call the models/
+    $result = $todo->read($this->_params['username'], $this->_params['userpass']);
+	 return $result;
     }
   
     public function updateAction()

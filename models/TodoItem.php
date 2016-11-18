@@ -41,19 +41,29 @@
 //===========  New Read function ==================
   public function read($username, $userpass)
     {
-    	  //get the username/password hash
+       	  //get the username/password hash
         $userhash = sha1("{$username}_{$userpass}");
-		 if( is_dir(DATA_PATH . "/{$userhash}") === false ) {
-            echo 'Error. No Such User file. ';
-        }
-         
+		 if( is_dir(DATA_PATH . "/{$userhash}") === FALSE) {
+            $readResult =  'Error. No Such Directory Exists. ';
+			 return $readResult;
+        } 
+  	
+	// Check if file exists and read it else throw an error.
+	if (file_exists(DATA_PATH . "/{$userhash}/{$this->todo_id}.txt"))	{
+         $readResult = array("todo_id"=>"1478802818","title"=>"test3 title","description"=>"test description","due_date"=>"","is_done"=>"false");
+         return $readResult;
+	} else  {
+		 $readResult =  'Error. No Such User file. ';
+		 return $readResult;
+	}
+     /*     Comment out 
         //if the $todo_id doesn't exist, throw an error
         if( is_null($this->todo_id) || !is_numeric($this->todo_id) ) {
               echo 'Error. No matching todo_id ';
         }
             
         //read the serialized array version into a variable
-        $todo_info = file_get_contents(DATA_PATH . "/{$userhash}/{$this->todo_id}.txt");
+       // $todo_info = file_get_contents(DATA_PATH . "/{$userhash}/{$this->todo_id}.txt");
          
         //if reading was not successful, throw an exception
         if( $todo_info === false ) {
@@ -63,7 +73,8 @@
 		
 		// Return the contents of the Todo file
 		return $todo_info;
-        
+      */  
+      
     }
    
     public function toArray()
