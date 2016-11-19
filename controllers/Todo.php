@@ -27,12 +27,13 @@ class Todo
      
     public function readAction()
     {
-    	  //create a new todo item
-     $todo = new TodoItem();
-	  
-    //Call the models/
-    $result = $todo->read($this->_params['username'], $this->_params['userpass']);
-	 return $result;
+    	//read all the todo items while passing the username and password to authenticate
+    	//Note:the double colon, is a token that allows access to static, constant, and overridden 
+    	//properties or methods of a class. Is equivalent to the -> token for objects.
+		$todo_items = TodoItem::getAllItems($this->_params['username'], $this->_params['userpass']);
+		
+		//return the list
+		return $todo_items;
     }
   
     public function updateAction()

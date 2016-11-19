@@ -39,52 +39,28 @@
 
 
 //===========  New Read function ==================
-  public function read($username, $userpass)
-    {
-       	  //get the username/password hash
-        $userhash = sha1("{$username}_{$userpass}");
-		 if( is_dir(DATA_PATH . "/{$userhash}") === FALSE) {
-            $readResult =  'Error. No Such Directory Exists. ';
-			 return $readResult;
-        } 
-		 
-	 $this->todo_id = "1478802818";
-		 
-     //Check if the $todo_id exists
-        if( is_null($this->todo_id) || !is_numeric($this->todo_id) ) {
-            //Throw Error
-           $readResult =  'Error. No Such todo_id. ';
-		    return $readResult;
-	    }
-  	
-	// Check if file exists and read it else throw an error.
-	if (file_exists(DATA_PATH . "/{$userhash}/{$this->todo_id}.txt"))	{
-         $readResult = file_get_contents(DATA_PATH . "/{$userhash}/{$this->todo_id}.txt");
-         return $readResult;
-	} else  {
-		 $readResult =  'Error. No Such User file. ';
-		 return $readResult;
-	}
-     /*     Comment out 
-        //if the $todo_id doesn't exist, throw an error
-        if( is_null($this->todo_id) || !is_numeric($this->todo_id) ) {
-              echo 'Error. No matching todo_id ';
-        }
-            
-        //read the serialized array version into a variable
-       // $todo_info = file_get_contents(DATA_PATH . "/{$userhash}/{$this->todo_id}.txt");
-         
-        //if reading was not successful, throw an exception
-        if( $todo_info === false ) {
-            throw new Exception('Failed to read todo item');
-			exit;
-        }
+// DirectoryIterator is a Standard PHP Library (SPL) collection of 
+// interfaces and classes that are meant to solve common problems. 
+// See http://php.net/manual/en/class.directoryiterator.php
+
+/* Declaring class properties or methods as static makes them 
+    accessible without needing an instantiation of the class. */
+  
+  public static function getAllItems($username, $userpass)
+	{
+		self::_checkIfUserExists($username, $userpass);
+		$userhash = sha1("{$username}_{$userpass}");
+		$todo_items = array();
+		foreach( new DirectoryIterator(DATA_PATH."/{$userhash}") as $file_info ) {
+			if( $file_info->isFile() == true ) {
+				$todo_item_serialized = file_get_contents($file_info->getPathname());
+				$todo_item_array = unserialize($todo_item_serialized);
+				$todo_items[] = $todo_item_array;
+			}
+		}
 		
-		// Return the contents of the Todo file
-		return $todo_info;
-      */  
-      
-    }
+		return $todo_items;
+	}
    
     public function toArray()
     {
@@ -97,5 +73,16 @@
             'is_done' => $this->is_done
         );
     }
-}
+
+
+private static function _checkIfUserExists($username, $userpass)
+	{
+		$userhash = sha1("{$username}_{$userpass}");
+		if( is_dir(DATA_PATH."/{$userhash}") === false ) {
+			throw new Exception('Username  or Password is invalid');
+		}
+		return true;
+	}
+	
+}  // End Class TodoItem
 ?>
