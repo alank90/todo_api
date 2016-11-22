@@ -7,7 +7,7 @@
     public $description;
     public $due_date;
     public $is_done;
-     
+    	
     public function save($username, $userpass)
     {
         //get the username/password hash
@@ -61,7 +61,45 @@
 		
 		return $todo_items;
 	}
-   
+	
+	 public function update($username, $userpass)
+    {
+        //get the username/password hash
+        $userhash = sha1("{$username}_{$userpass}");
+                 
+        //if the $todo_id isn't set yet throw an error
+        if( is_null($this->todo_id) || !is_numeric($this->todo_id) ) {
+            //File Doesn't exist
+            throw new Exception('Error. No such todo item exists.');
+        }
+         
+        //get the array version of this todo item
+        $todo_item_array = $this->toArray();
+      
+        //write the updated serialized array version into existing file
+        $success = file_put_contents(DATA_PATH . "/{$userhash}/{$this->todo_id}.txt", serialize($todo_item_array));
+         
+        //if saving was not successful, throw an exception
+        if( $success === false ) {
+            throw new Exception('Warning! Failed to update todo item');
+        }
+         
+        //return the array version
+        return $todo_item_array;
+    }
+	
+	public function delete($username, $userpass)
+    {
+        //get the username/password hash
+        $userhash = sha1("{$username}_{$userpass}");
+		$success = unlink(DATA_PATH . "/{$userhash}/{$this->todo_id}.txt");
+	     //if delete not succesfull, throw an exception
+        if( $success === false ) {
+            throw new Exception('Warning! Delete Unsuccessful!');
+        }	
+	}
+
+
     public function toArray()
     {
         //return an array version of the todo item

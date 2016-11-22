@@ -36,13 +36,31 @@ class Todo
 		return $todo_items;
     }
   
+           //update a todo item
     public function updateAction()
     {
         //update a todo item
-    }
+    $todo = new TodoItem();
+    $todo->title = $this->_params['title'];
+    $todo->description = $this->_params['description'];
+    $todo->due_date = $this->_params['due_date'];
+	$todo->todo_id = $this->_params['todo_id'];
+    $todo->is_done = 'false';
      
+    //pass the user's username and password to authenticate the user
+    $todo->update($this->_params['username'], $this->_params['userpass']);
+     
+    //return the todo item in array format
+    return $todo->toArray();
+}
+      
     public function deleteAction()
     {
         //delete a todo item
+         $todo = new TodoItem();
+		 $todo->todo_id = $this->_params['todo_id'];
+		 
+		 //pass the user's username and password to authenticate the user
+         $todo->delete($this->_params['username'], $this->_params['userpass']);
     }
 }

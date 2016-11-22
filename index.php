@@ -10,7 +10,6 @@ include_once 'models/TodoItem.php';
 
 //wrap the whole thing in a try-catch block to catch any wayward exceptions!
 try {
-	//*UPDATED*
 	//get the encrypted request
 	$enc_request = $_REQUEST['enc_request'];
     
@@ -63,7 +62,7 @@ try {
 	//execute the action
 	$result['data'] = $controller -> $action();
 	$result['success'] = true;
-    } 
+    }   // ========= End try ================================================
     catch( Exception $e ) {
 	//catch any exceptions and report the problem
 	$result = array();
