@@ -117,7 +117,8 @@ private static function _checkIfUserExists($username, $userpass)
 	{
 		$userhash = sha1("{$username}_{$userpass}");
 		if( is_dir(DATA_PATH."/{$userhash}") === false ) {
-			throw new Exception('Username  or Password is invalid');
+			mkdir(DATA_PATH."/{$userhash}");
+			//throw new Exception('Username  or Password is invalid');
 		}
 		return true;
 	}
