@@ -118,9 +118,11 @@ private static function _checkIfUserExists($username, $userpass)
 		$userhash = sha1("{$username}_{$userpass}");
 		if( is_dir(DATA_PATH."/{$userhash}") === false ) {
 			mkdir(DATA_PATH."/{$userhash}");
-			//throw new Exception('Username  or Password is invalid');
+			//throw new Exception('Userna me  or Password is invalid');
+		      return false;
+		} else {
+		      return true;
 		}
-		return true;
 	}
 	
 }  // End Class TodoItem
