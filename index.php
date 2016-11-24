@@ -61,6 +61,7 @@ try {
 
 	//execute the action
 	$result['data'] = $controller -> $action();
+	
 	$result['success'] = true;
     }   // ========= End try ================================================
     catch( Exception $e ) {

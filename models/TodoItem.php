@@ -48,7 +48,13 @@
   
   public static function getAllItems($username, $userpass)
 	{
-		self::_checkIfUserExists($username, $userpass);
+		$user_check = self::_checkIfUserExists($username, $userpass);
+		if (!$user_check) {
+			$todo_items[] = array( 'todo_id' => "1234567");
+			return $todo_items;
+			exit;
+		}
+		
 		$userhash = sha1("{$username}_{$userpass}");
 		$todo_items = array();
 		foreach( new DirectoryIterator(DATA_PATH."/{$userhash}") as $file_info ) {
@@ -118,10 +124,12 @@ private static function _checkIfUserExists($username, $userpass)
 		$userhash = sha1("{$username}_{$userpass}");
 		if( is_dir(DATA_PATH."/{$userhash}") === false ) {
 			mkdir(DATA_PATH."/{$userhash}");
-			//throw new Exception('Userna me  or Password is invalid');
+			//throw new Exception('Username  or Password is invalid');
 		      return false;
+		} elseif  (count(glob(DATA_PATH . "/{$userhash}/*")) === 0 ) {
+			return false;
 		} else {
-		      return true;
+			 return true;
 		}
 	}
 	
