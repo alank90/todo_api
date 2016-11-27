@@ -41,12 +41,21 @@ class Todo
     {
         //update a todo item
     $todo = new TodoItem();
-    $todo->title = $this->_params['title'];
-    $todo->description = $this->_params['description'];
-    $todo->due_date = $this->_params['due_date'];
-	$todo->todo_id = $this->_params['todo_id'];
-    $todo->is_done = 'false';
-     
+	if (isset($this->_params['markasdone_button']))  {
+	  	$todo->title = $this->_params['title'];
+        $todo->description = $this->_params['description'];
+        $todo->due_date = $this->_params['due_date'];
+	    $todo->todo_id = $this->_params['todo_id'];
+		$todo->is_done = 'true';
+	}  
+	else  {
+       $todo->title = $this->_params['title'];
+       $todo->description = $this->_params['description'];
+       $todo->due_date = $this->_params['due_date'];
+	   $todo->todo_id = $this->_params['todo_id'];
+       $todo->is_done = 'false';
+	}
+	
     //pass the user's username and password to authenticate the user
     $todo->update($this->_params['username'], $this->_params['userpass']);
      
