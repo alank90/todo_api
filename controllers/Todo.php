@@ -30,11 +30,13 @@ class Todo
     	//read all the todo items while passing the username and password to authenticate
     	//Note:the double colon, is a token that allows access to static, constant, and overridden 
     	//properties or methods of a class. Is equivalent to the -> token for objects.
+	    $todo = new TodoItem();
 		$todo_items = TodoItem::getAllItems($this->_params['username'], $this->_params['userpass']);
-		
+		$todo_items = $todo -> sortArray($todo_items);
 		//return the list
 		return $todo_items;
     }
+	
   
            //update a todo item
     public function updateAction()
@@ -71,4 +73,5 @@ class Todo
 		 //pass the user's username and password to authenticate the user
          $todo->delete($this->_params['username'], $this->_params['userpass']);
     }
+	
 }

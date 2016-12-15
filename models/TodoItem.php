@@ -105,9 +105,33 @@
         }	
 	}
 
+public function sortArray($arrayItem)  {
+		// Sort Array
+   function cmp($item1,$item2) {
+        if ($item1['due_date'] == $item2['due_date']) return 0;
+        return (strtotime($item1['due_date']) > strtotime($item2['due_date'])) ? 1 : -1;  //This is the ternary operator.
+    }
+  
+   usort($arrayItem, 'cmp');
+  
+  //Sort by is_done
+   foreach ($arrayItem as $idx => $arrayElement) {
+    foreach ($arrayElement as $valueKey => $value) {
+        if (($valueKey == 'is_done') && ($value == 'true')) {
+            $temp = $arrayElement;
+            //delete this particular object from the $array
+            array_push($arrayItem, $temp);
+            unset($arrayItem[$idx]);
+        }
+    }
+}
+   //Need to reindex array due to a bug in json_decode used later. non-sequential arrays
+   //get converted to objects when json_decode is used.
+   $arrayItem = array_values( $arrayItem);
+   return $arrayItem;
+}
 
-    public function toArray()
-    {
+    public function toArray()   {
         //return an array version of the todo item
         return array(
             'todo_id' => $this->todo_id,
@@ -115,13 +139,11 @@
             'description' => $this->description,
             'due_date' => $this->due_date,
             'is_done' => $this->is_done
-        );
-    }
+		 );
+	}
 
-
-private static function _checkIfUserExists($username, $userpass)
-	{
-		$userhash = sha1("{$username}_{$userpass}");
+  private static function _checkIfUserExists($username, $userpass)  {
+		$userhash = sha1(	"{$username}_{$userpass}");
 		if( is_dir(DATA_PATH."/{$userhash}") === false ) {
 			mkdir(DATA_PATH."/{$userhash}");
 			//throw new Exception('Username  or Password is invalid');
@@ -132,6 +154,7 @@ private static function _checkIfUserExists($username, $userpass)
 			 return true;
 		}
 	}
-	
+ 	
 }  // End Class TodoItem
-?>
+
+ ?>
