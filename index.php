@@ -63,29 +63,6 @@ try {
 	$result['data'] = $controller -> $action();
 	$result['success'] = true;
 	
-	/* Sort Array
-   function cmp($item1,$item2) {
-        if ($item1['due_date'] == $item2['due_date']) return 0;
-        return (strtotime($item1['due_date']) > strtotime($item2['due_date'])) ? 1 : -1;  //This is the ternary operator.
-    }
-  
-   usort($result['data'], 'cmp');
-  
-  //Sort by is_done
-   foreach ($result['data'] as $idx => $arrayElement) {
-    foreach ($arrayElement as $valueKey => $value) {
-        if (($valueKey == 'is_done') && ($value == 'true')) {
-            $temp = $arrayElement;
-            //delete this particular object from the $array
-            array_push($result['data'], $temp);
-            unset($result['data'][$idx]);
-        }
-    }
-}
-   //Need to reindex array due to a bug in json_decode used later. non-sequential arrays
-   //get converted to objects when json_decode is used.
-   $result['data'] = array_values($result['data']);
-*/
 }   // ========= End try ================================================
     catch( Exception $e ) {
 	//catch any exceptions and report the problem
