@@ -7,7 +7,8 @@
     public $description;
     public $due_date;
     public $is_done;
-    	
+   
+   // ======================================================================================== 	
     public function save($username, $userpass)
     {
         //get the username/password hash
@@ -36,14 +37,15 @@
         //return the array version
         return $todo_item_array;
     }
+ // =============================================================================================
 
+ 
+ /*===========  New Read Method ==================================================================
+ DirectoryIterator is a Standard PHP Library (SPL) collection of 
+ interfaces and classes that are meant to solve common problems. 
+ See http://php.net/manual/en/class.directoryiterator.php */
 
-//===========  New Read function ==================
-// DirectoryIterator is a Standard PHP Library (SPL) collection of 
-// interfaces and classes that are meant to solve common problems. 
-// See http://php.net/manual/en/class.directoryiterator.php
-
-/* Declaring class properties or methods as static makes them 
+/* Note: Declaring class properties or methods as static makes them 
     accessible without needing an instantiation of the class. */
   
   public static function getAllItems($username, $userpass)
@@ -57,7 +59,7 @@
 		
 		$userhash = sha1("{$username}_{$userpass}");
 		$todo_items = array();
-		foreach( new DirectoryIterator(DATA_PATH."/{$userhash}") as $file_info ) {
+		foreach( new DirectoryIterator(DATA_PATH . "/{$userhash}") as $file_info ) {
 			if( $file_info->isFile() == true ) {
 				$todo_item_serialized = file_get_contents($file_info->getPathname());
 				$todo_item_array = unserialize($todo_item_serialized);
@@ -67,7 +69,10 @@
 		
 		return $todo_items;
 	}
+	// ===========================================================================================
 	
+	
+	// ===========================================================================================
 	 public function update($username, $userpass)
     {
         //get the username/password hash
@@ -93,7 +98,9 @@
         //return the array version
         return $todo_item_array;
     }
+	// ==============================================================================================
 	
+	// ==============================================================================================
 	public function delete($username, $userpass)
     {
         //get the username/password hash
@@ -104,7 +111,9 @@
             throw new Exception('Warning! Delete Unsuccessful!');
         }	
 	}
-
+ // =================================================================================================
+  
+ // =================================================================================================
 public function sortArray($arrayItem)  {
 		// Sort Array
    function cmp($item1,$item2) {
@@ -125,13 +134,16 @@ public function sortArray($arrayItem)  {
         }
     }
 }
-   //Need to reindex array due to a bug in json_decode used later. non-sequential arrays
-   //get converted to objects when json_decode is used.
+   /*Need to reindex array due to a bug in json_decode used later. non-sequential arrays
+     get converted to objects when json_decode is used. */
    $arrayItem = array_values( $arrayItem);
    return $arrayItem;
 }
+// ====================================================================================================
 
-    public function toArray()   {
+// ====================================================================================================
+    public function toArray()   
+    {
         //return an array version of the todo item
         return array(
             'todo_id' => $this->todo_id,
@@ -141,11 +153,13 @@ public function sortArray($arrayItem)  {
             'is_done' => $this->is_done
 		 );
 	}
-
+  // ======================================================================================================
+  
+  // ======================================================================================================
   private static function _checkIfUserExists($username, $userpass)  {
 		$userhash = sha1(	"{$username}_{$userpass}");
-		if( is_dir(DATA_PATH."/{$userhash}") === false ) {
-			mkdir(DATA_PATH."/{$userhash}");
+		if( is_dir(DATA_PATH . "/{$userhash}") === false ) {
+			mkdir(DATA_PATH . "/{$userhash}");
 			//throw new Exception('Username  or Password is invalid');
 		      return false;
 		} elseif  (count(glob(DATA_PATH . "/{$userhash}/*")) === 0 ) {
@@ -155,6 +169,6 @@ public function sortArray($arrayItem)  {
 		}
 	}
  	
-}  // End Class TodoItem
+}  // End Class definition
 
- ?>
+ 

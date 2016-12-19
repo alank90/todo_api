@@ -42,13 +42,13 @@ try {
 
 	//check if the controller exists. if not, throw an exception
 	if (file_exists("controllers/{$controller}.php")) {
-		include_once "controllers/{$controller}.php";
+		 include_once "controllers/{$controller}.php";
 	} else {
-		throw new Exception('Controller is invalid.');
+		 throw new Exception('Controller is invalid.');
 	}
 
-	//create a new instance of the controller, and pass it the parameters 
-	//   from the request. Important!!! This is where Todo.php gets instantiated.
+	// create a new instance of the controller, and pass it the parameters 
+	// from the request. Important!!! This is where class Todo gets instantiated.
 	
 	$controller = new $controller($params);
     
