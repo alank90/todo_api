@@ -114,7 +114,8 @@
  // =================================================================================================
   
  // =================================================================================================
-public function sortArray($arrayItem)  {
+public static function sortArray($arrayItem) 
+{
 		// Sort Array
    function cmp($item1,$item2) {
         if ($item1['due_date'] == $item2['due_date']) return 0;
@@ -128,12 +129,12 @@ public function sortArray($arrayItem)  {
     foreach ($arrayElement as $valueKey => $value) {
         if (($valueKey == 'is_done') && ($value == 'true')) {
             $temp = $arrayElement;
-            //delete this particular object from the $array
-            array_push($arrayItem, $temp);
+            array_push($arrayItem, $temp); //Push item to end of array
+             //delete this item from the $array
             unset($arrayItem[$idx]);
-        }
+         }
+      }
     }
-}
    /*Need to reindex array due to a bug in json_decode used later. non-sequential arrays
      get converted to objects when json_decode is used. */
    $arrayItem = array_values( $arrayItem);

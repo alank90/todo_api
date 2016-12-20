@@ -34,9 +34,8 @@ class Todo
     	/* Read all the todo items while passing the username and password to authenticate
              Note: The "::" is a token that allows access to static, constant, and overridden 
     	     properties or methods of a class. Is equivalent to the "->" token for objects.*/
-	    $todo = new TodoItem();
 		$todo_items = TodoItem::getAllItems($this->_params['username'], $this->_params['userpass']);
-		$todo_items = $todo -> sortArray($todo_items);
+		$todo_items = TodoItem::sortArray($todo_items);
 		
 		//return the list
 		return $todo_items;
