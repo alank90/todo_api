@@ -1,4 +1,9 @@
 <?php
+/*  ========================================================================
+ * The Server receives an HTTP request and routes it through a single entry point(index.php). 
+ * At that entry point, this Front Controller(index.php) analyzes the request and, based on it, 
+ * invokes an Action of the appropriate Controller(Todo class). This process is called routing.
+ ======================================================================== */
 // Define path to data folder
 define('DATA_PATH', realpath(dirname(__FILE__) . '/data'));
 
